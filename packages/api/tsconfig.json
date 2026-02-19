@@ -13,4 +13,5 @@
   // "exclude": ["./src/generated"]
   "include": ["src/**/*.ts"],   // 只编译 src，不编译 test
   "exclude": ["./src/generated", "test"] // 排除 test 文件夹
+
 }
