@@ -6,7 +6,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "types": ["node"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true  // 让 TypeScript 忽略缺失的类型
   },
   // "include": ["src/**/*.ts", "test/**/*.ts"],
   // "exclude": ["./src/generated"]
