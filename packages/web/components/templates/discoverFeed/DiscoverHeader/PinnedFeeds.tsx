@@ -6,11 +6,13 @@ import { Dropdown, DropdownOption } from '../../../elements/DropdownElements'
 import { MoreOptionsIcon } from '../../../elements/images/MoreOptionsIcon'
 import { useRouter } from 'next/router'
 import { DiscoverFeed } from "../../../../lib/networking/queries/useGetDiscoverFeeds"
+import { Draggable } from '../../../patterns/Draggable'
 
 type PinnedFeedsProps = {
   items: DiscoverFeed[]
   selected: string
   applyFeedFilter: (feedFilter: string) => void
+  topFeed?: boolean
 }
 
 export const PinnedFeeds = (props: PinnedFeedsProps): JSX.Element => {
@@ -23,16 +25,27 @@ export const PinnedFeeds = (props: PinnedFeedsProps): JSX.Element => {
       css={{
         width: '100%',
         maxWidth: '100%',
-        pt: '10px',
+        pt: props.topFeed ? '0px' : '10px',
         pb: '0px',
-        gap: '10px',
+        pr: '0px',
+        gap: '5px',
         bg: 'transparent',
-        // overflowX: 'scroll',
+        '@mdDown': {
+          overflowX: 'scroll',
+          '::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
       }}
     >
-      {[{ title: "All Feeds", id:"All Feeds" }, { title: "Community", id: "Community" },  ...props.items.map(({visibleName, id}) => ({ title: visibleName, id }))].map((it) => {
-        const style =
-          it.id == props.selected ? 'ctaPill' : 'ctaPillUnselected'
+      {[
+        { title: 'All Feeds', id: 'All Feeds' },
+        ...props.items.map(({ visibleName, id }) => ({
+          title: visibleName,
+          id,
+        })),
+      ].map((it) => {
+        const style = it.id == props.selected ? 'ctaPill' : 'ctaPillUnselected'
         return (
           <Button
             key={it.id}
@@ -79,7 +92,6 @@ export const PinnedFeeds = (props: PinnedFeedsProps): JSX.Element => {
           }}
           title="Edit"
         />
-
       </Dropdown>
     </HStack>
   )

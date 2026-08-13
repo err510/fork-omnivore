@@ -61,6 +61,7 @@ export function DiscoverItemListCard(
         px: '20px',
         pl: '10px',
         py: '15px',
+        opacity: props.hidden ? 0.5 : 1,
         height: '100%',
         cursor: 'pointer',
         gap: '10px',
@@ -87,7 +88,6 @@ export function DiscoverItemListCard(
       alignment="start"
       distribution="start"
     >
-      {!isTouchScreenDevice() && (
         <Box
           ref={refs.setFloating}
           style={{ ...floatingStyles, zIndex: 3 }}
@@ -101,11 +101,12 @@ export function DiscoverItemListCard(
             setSavedId={props.setSavedId}
             savedId={props.savedId}
             savedUrl={props.savedUrl}
+            hidden={props.hidden}
             setSavedUrl={props.setSavedUrl}
             deleteDiscoverItem={props.deleteDiscoverItem}
+            hideDiscoverItem={props.setItemHidden}
           />
         </Box>
-      )}
       <DiscoverListCardContent
         {...props}
         savedId={props.savedId}
